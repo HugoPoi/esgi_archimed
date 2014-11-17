@@ -2,7 +2,6 @@
 package main;
 
 import java.awt.EventQueue;
-
 import ui.MainFrame;
 
 public class Main {
