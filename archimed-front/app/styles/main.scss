@@ -1,0 +1,44 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+
+#default-items{
+  color: white;
+  &{
+    padding: 0;
+  }
+  h2{
+    margin: 0;
+    padding: 0.5em;
+    cursor: grab;
+  }
+}
+
+.grid-line-container{
+  .grid-element-container{
+    padding-bottom: 16.666%;
+    background-color: purple;
+    position: relative;
+    &{
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .content{
+      padding: 1em;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      color: white;
+
+      &.have-item{
+        cursor: grab;
+        z-index: 100;
+      }
+      &.have-item:hover{
+        box-shadow: inset 0px 0px 0px 5px rgba(255, 255, 255, 0.40);
+      }
+    }
+  }
+}

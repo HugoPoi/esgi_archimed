@@ -1,0 +1,46 @@
+
+<div class="row">
+  <div class="col-md-3" id="default-items">
+    <h2 ng-model="defaultMediator" style="background-color: {{defaultMediator.color}}" data-drag="true" jqyoui-draggable="{animate: true, placeholder: 'keep'}" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}">
+      {{defaultMediator.name}}
+      <i class="glyphicon glyphicon-log-out pull-right"></i>
+    </h2>
+    <h2 ng-model="defaultWrapper" style="background-color: {{defaultWrapper.color}}" data-drag="true" jqyoui-draggable="{animate: true, placeholder: 'keep'}" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}">
+      {{defaultWrapper.name}}
+      <i class="glyphicon glyphicon-log-out pull-right"></i>
+    </h2>
+  </div>
+  <div class="col-md-9">
+    <div class="row grid-line-container" ng-repeat="gridline in grid">
+      <div ng-repeat="cellgrid in gridline" ng-model="cellgrid" class="col-md-2 grid-element-container" data-drop="true" jqyoui-droppable>
+        <div class="content" ng-show="cellgrid.name !== undefined" ng-class="{ 'have-item' : cellgrid.name }" ng-model="cellgrid" style="background-color: {{cellgrid.color}}" data-drag="true" jqyoui-draggable>
+          {{cellgrid.name}}
+          <a class="glyphicon glyphicon-cog" href="" ng-click="openEditor(cellgrid)"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editor-modal" tabindex="-1" role="dialog" aria-labelledby="modal-editor-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="modal-editor-label">Editor</h4>
+      </div>
+      <div class="modal-body">
+        <form role="form">
+          <div class="form-group">
+            <label for="input-name-editor">Name</label>
+            <input type="text" ng-model="currentEdit.name" class="form-control" id="input-name-editor" placeholder="Enter a name.">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
