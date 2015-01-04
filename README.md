@@ -8,7 +8,7 @@ mediateur.
 * Export configuration in XML format
 
 
-## Installation développement
+## Installation de l'env de développement pour le front
 
 Dependencies for build:
 
@@ -22,4 +22,10 @@ npm install
 bower install
 grunt serve
 ```
+## Installation de l'env de dev pour le backend
+
+Dependencies for build:
+
+* Typesafe
+
 
