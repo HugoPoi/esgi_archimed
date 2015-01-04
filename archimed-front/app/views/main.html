@@ -1,21 +1,24 @@
 
-<div class="row">
-  <div class="col-md-3" id="default-items">
-    <h2 ng-model="defaultMediator" style="background-color: {{defaultMediator.color}}" data-drag="true" jqyoui-draggable="{animate: true, placeholder: 'keep'}" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}">
+<div class="row panel-container">
+  <div class="col-md-3" id="left-panel">
+    <h2 ng-model="defaultMediator" style="background-color: {{defaultMediator.color}}" data-drag="true" jqyoui-draggable="{ onStart: 'startDragging', onStop: 'stopDragging', animate: true, placeholder: 'keep'}" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}">
       {{defaultMediator.name}}
       <i class="glyphicon glyphicon-log-out pull-right"></i>
     </h2>
-    <h2 ng-model="defaultWrapper" style="background-color: {{defaultWrapper.color}}" data-drag="true" jqyoui-draggable="{animate: true, placeholder: 'keep'}" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}">
+    <h2 ng-model="defaultWrapper" style="background-color: {{defaultWrapper.color}}" data-drag="true" jqyoui-draggable="{ onStart: 'startDragging', onStop: 'stopDragging', animate: true, placeholder: 'keep'}" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}">
       {{defaultWrapper.name}}
       <i class="glyphicon glyphicon-log-out pull-right"></i>
     </h2>
   </div>
-  <div class="col-md-9">
-    <div class="row grid-line-container" ng-repeat="gridline in grid">
-      <div ng-repeat="cellgrid in gridline" ng-model="cellgrid" class="col-md-2 grid-element-container" data-drop="true" jqyoui-droppable>
-        <div class="content" ng-show="cellgrid.name !== undefined" ng-class="{ 'have-item' : cellgrid.name }" ng-model="cellgrid" style="background-color: {{cellgrid.color}}" data-drag="true" jqyoui-draggable>
-          {{cellgrid.name}}
-          <a class="glyphicon glyphicon-cog" href="" ng-click="openEditor(cellgrid)"></a>
+  <div class="col-md-9" id="grid-panel">
+    <div class="row grid-line-container" ng-repeat="gridline in grid" ng-init="lineindex = $index" ng-class="{ 'dragging' : currentlyDragging }">
+      <div ng-repeat="cellgrid in gridline track by lineindex+''+$index" ng-init="cellindex = $index" ng-model="grid[lineindex][cellindex]" class="col-md-2 grid-element-container" ng-class="{ 'dragging' : currentlyDragging }" data-drop="true" jqyoui-droppable="{ 'onDrop': 'checkGroups' }">
+        <div class="content" ng-show="cellgrid" ng-class="genClassItem(cellgrid, lineindex, cellindex)" ng-model="grid[lineindex][cellindex]" style="background-color: {{cellgrid.color}}" data-drag="true" jqyoui-draggable="{ onStart: 'startDragging', onStop: 'stopDragging' }">
+          {{cellgrid.name}}<br>
+          {{cellgrid.group.name}}<br>
+          <a class="btn btn-edit" data-toggle="tooltip" data-placement="top" title="edit" data-animation="{ selector : '.btn-edit' }" href="#" ng-click="openEditor(cellgrid)">
+            <i class="glyphicon glyphicon-cog"></i>
+          </a>
         </div>
       </div>
     </div>

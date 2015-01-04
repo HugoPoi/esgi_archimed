@@ -4,41 +4,96 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 // endbower
 
 
-#default-items{
+
+body{
+  background-color: purple;
   color: white;
-  &{
-    padding: 0;
-  }
-  h2{
-    margin: 0;
-    padding: 0.5em;
-    cursor: grab;
-  }
-}
 
-.grid-line-container{
-  .grid-element-container{
-    padding-bottom: 16.666%;
-    background-color: purple;
-    position: relative;
+  .row.panel-container{
     &{
-      padding-left: 0;
-      padding-right: 0;
+      overflow: hidden;
     }
-    .content{
-      padding: 1em;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      color: white;
+    #left-panel,#grid-panel{
+      margin-bottom: -99999px;
+      padding-bottom: 99999px;
+    }
+  }
 
-      &.have-item{
-        cursor: grab;
-        z-index: 100;
+  #left-panel{
+    &{
+      padding: 0;
+      border-right: solid 1px white;
+    }
+    h2{
+      margin: 0;
+      padding: 0.5em;
+      cursor: grab;
+    }
+  }
+
+  .grid-line-container{
+    &.dragging{
+      border-bottom: dashed 1px rgba(255, 255, 255, 0.40);
+    }
+    .grid-element-container{
+      padding-bottom: 16.666%;
+      position: relative;
+      &{
+        padding-left: 0;
+        padding-right: 0;
       }
-      &.have-item:hover{
-        box-shadow: inset 0px 0px 0px 5px rgba(255, 255, 255, 0.40);
+      &.dragging{
+        border-right: dashed 1px rgba(255, 255, 255, 0.40);
       }
+      .content{
+        padding: 1em;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        font-weight: bold;
+
+        &.have-item{
+          //cursor: grab;
+          //z-index: 100;
+        }
+        &.have-item:hover{
+          box-shadow: inset 0px 0px 0px 5px rgba(255, 255, 255, 0.40);
+        }
+      }
+
+      .free-left,.free-right,.free-top,.free-bottom{
+        border-width: 3px;
+      }
+      .free-left{
+        border-left: solid;
+      }
+      .free-right{
+        border-right: solid;
+      }
+      .free-top{
+        border-top: solid;
+      }
+      .free-bottom{
+        border-bottom: solid;
+      }
+      .valid-group{
+        border-color: white;
+      }
+      .invalid-group{
+        border-color: red;
+      }
+
+      .btn-edit{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+      }
+    }
+  }
+  .ui-draggable{
+    cursor: grab;
+    &.ui-draggable-dragging{
+      cursor: grabbing !important;
     }
   }
 }
