@@ -16,8 +16,11 @@
         <div class="content" ng-show="cellgrid" ng-class="genClassItem(cellgrid, lineindex, cellindex)" ng-model="grid[lineindex][cellindex]" style="background-color: {{cellgrid.color}}" data-drag="true" jqyoui-draggable="{ onStart: 'startDragging', onStop: 'stopDragging' }">
           {{cellgrid.name}}<br>
           {{cellgrid.group.name}}<br>
-          <a class="btn btn-edit" data-toggle="tooltip" data-placement="top" title="edit" data-animation="{ selector : '.btn-edit' }" href="#" ng-click="openEditor(cellgrid)">
+          <a class="btn btn-edit" title="edit" href="" ng-click="openEditor(cellgrid)">
             <i class="glyphicon glyphicon-cog"></i>
+          </a>
+          <a class="btn btn-delete" title="delete" href="" ng-click="deleteCell(lineindex, cellindex)">
+            <i class="glyphicon glyphicon-trash"></i>
           </a>
         </div>
       </div>

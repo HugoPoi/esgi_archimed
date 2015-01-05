@@ -10,10 +10,6 @@
 angular.module('archimedApp')
   .controller('MainCtrl', function ($scope, $timeout) {
 
-    /*$timeout(function(){
-      $('[data-toggle="tooltip"]').tooltip();
-    }, 500);*/
-
     $scope.defaultMediator = { 'name' : 'New Mediator', color: 'orange', type: 'mediator' };
     $scope.defaultWrapper = { 'name' : 'New Wrapper' , color: 'blue', type: 'wrapper' };
 
@@ -24,9 +20,12 @@ angular.module('archimedApp')
       $('#editor-modal').modal();
     };
 
+    $scope.deleteCell = function( r, c ){
+      $scope.grid[r][c] = null;
+      $scope.checkGroups();
+    };
 
     $scope.checkGroups = function(){
-      //console.log($scope.grid);
      Array2D.contiguous($scope.grid, function(cell){
        return cell !== null;
      }).forEach(function(group, index){

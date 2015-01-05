@@ -4,7 +4,6 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 // endbower
 
 
-
 body{
   background-color: purple;
   color: white;
@@ -87,6 +86,11 @@ body{
         position: absolute;
         bottom: 0;
         right: 0;
+      }
+      .btn-delete{
+        position: absolute;
+        bottom: 0;
+        right: 40px;
       }
     }
   }
