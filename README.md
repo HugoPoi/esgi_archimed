@@ -12,8 +12,11 @@ mediateur.
 
 Dependencies for build:
 
-* nodejs/npm
-* bower/grunt
+* nodejs (http://nodejs.org/)
+* How to install Node.js and npm https://docs.npmjs.com/getting-started/installing-node
+* You need Grunt-cli `sudo npm install -g grunt-cli`
+* You need Bower `sudo npm install -g bower`
+* You need Compass for building CSS http://compass-style.org/install/
 
 ```
 git clone https://github.com/Afalide/esgi_archimed.git
@@ -26,6 +29,15 @@ grunt serve
 
 Dependencies for build:
 
-* Typesafe
+* Java 1.7 or greater
+
+```
+cd archimed-backend
+./activator run
+
+# Under Windows
+/activator.bat run
+
+```
 
 
