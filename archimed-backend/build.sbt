@@ -1,4 +1,4 @@
-name := """play-java-intro"""
+name := """archimed-backend"""
 
 version := "1.0-SNAPSHOT"
 

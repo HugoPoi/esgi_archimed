@@ -5,10 +5,9 @@ import play.Play;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import java.io.File;
-import java.io.FilenameFilter;
-import java.io.IOException;
+import java.io.*;
 
 public class ArchimedConfig {
 
@@ -16,13 +15,34 @@ public class ArchimedConfig {
 
     public String name;
 
-    public Archimed xmlConf;
+    private Archimed xmlConf;
+
+    public Archimed getXmlConf() throws JAXBException {
+        if(xmlConf == null){
+            JAXBContext jc = JAXBContext.newInstance("generated");
+            Unmarshaller unmarshaller = jc.createUnmarshaller();
+            xmlConf = (Archimed) unmarshaller.unmarshal(path);
+        }
+        return xmlConf;
+    }
+
+    public void setXmlConf(Archimed xmlConf) {
+        this.xmlConf = xmlConf;
+    }
+
+    public File path;
 
     public ArchimedConfig(File file) throws JAXBException{
 
-        JAXBContext jc = JAXBContext.newInstance("generated");
-        Unmarshaller unmarshaller = jc.createUnmarshaller();
-        xmlConf = (Archimed) unmarshaller.unmarshal(file);
+        path = file;
+
+
+    }
+
+    public ArchimedConfig(String filename){
+
+        path = Play.application().getFile(Play.application().configuration().getString("archimed.configpath") + "/" + filename);
+
     }
 
     public static File[] listConfigFile(){
@@ -36,9 +56,9 @@ public class ArchimedConfig {
 
     }
 
-    public static ArchimedConfig archimedFromFileName(String filename) throws JAXBException{
-
-        return new ArchimedConfig(Play.application().getFile(Play.application().configuration().getString("archimed.configpath") + "/" + filename));
-
+    public void save() throws JAXBException, FileNotFoundException{
+        JAXBContext jc = JAXBContext.newInstance("generated");
+        Marshaller marshaller = jc.createMarshaller();
+        marshaller.marshal(xmlConf, new FileOutputStream(path));
     }
 }

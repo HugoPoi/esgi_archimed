@@ -33,10 +33,10 @@ Dependencies for build:
 
 ```
 cd archimed-backend
-./activator run
+./activator "run 9001"
 
 # Under Windows
-/activator.bat run
+/activator.bat "run 9001"
 
 ```
 
