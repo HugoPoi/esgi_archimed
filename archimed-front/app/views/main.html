@@ -1,19 +1,30 @@
 
 <div class="row panel-container">
   <div class="col-md-3" id="left-panel">
-    <h2 ng-model="defaultMediator" style="background-color: {{defaultMediator.color}}" data-drag="true" jqyoui-draggable="{ onStart: 'startDragging', onStop: 'stopDragging', animate: true, placeholder: 'keep'}" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}">
-      {{defaultMediator.name}}
-      <i class="glyphicon glyphicon-log-out pull-right"></i>
-    </h2>
-    <h2 ng-model="defaultWrapper" style="background-color: {{defaultWrapper.color}}" data-drag="true" jqyoui-draggable="{ onStart: 'startDragging', onStop: 'stopDragging', animate: true, placeholder: 'keep'}" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}">
-      {{defaultWrapper.name}}
-      <i class="glyphicon glyphicon-log-out pull-right"></i>
-    </h2>
+    <div class="new-item">
+      <h3>New items</h3>
+      <h2 ng-model="defaultMediator" ng-class="defaultMediator.type" data-drag="true" jqyoui-draggable="{ onStart: 'startDragging', onStop: 'stopDragging', animate: true, placeholder: 'keep', deepCopy: true}" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}">
+        {{defaultMediator.name}}
+        <i class="glyphicon glyphicon-log-out pull-right"></i>
+      </h2>
+      <h2 ng-model="defaultWrapper" ng-class="defaultWrapper.type" data-drag="true" jqyoui-draggable="{ onStart: 'startDragging', onStop: 'stopDragging', animate: true, placeholder: 'keep', deepCopy: true}" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}">
+        {{defaultWrapper.name}}
+        <i class="glyphicon glyphicon-log-out pull-right"></i>
+      </h2>
+    </div>
+
+    <div class="menu-list-config">
+      <h3>Configurations list</h3>
+      <h2 ng-repeat="config in configList" ng-click="loadConfig(config)">{{config.filename}}</h2>
+      <h3 ng-click="saveConfig('test.xml')">New file</h3>
+    </div>
+
+    <div class=""></div>
   </div>
   <div class="col-md-9" id="grid-panel">
     <div class="row grid-line-container" ng-repeat="gridline in grid" ng-init="lineindex = $index" ng-class="{ 'dragging' : currentlyDragging }">
       <div ng-repeat="cellgrid in gridline track by lineindex+''+$index" ng-init="cellindex = $index" ng-model="grid[lineindex][cellindex]" class="col-md-2 grid-element-container" ng-class="{ 'dragging' : currentlyDragging }" data-drop="true" jqyoui-droppable="{ 'onDrop': 'checkGroups' }">
-        <div class="content" ng-show="cellgrid" ng-class="genClassItem(cellgrid, lineindex, cellindex)" ng-model="grid[lineindex][cellindex]" style="background-color: {{cellgrid.color}}" data-drag="true" jqyoui-draggable="{ onStart: 'startDragging', onStop: 'stopDragging' }">
+        <div class="content" ng-show="cellgrid" ng-class="genClassItem(cellgrid, lineindex, cellindex)" ng-model="grid[lineindex][cellindex]" data-drag="true" jqyoui-draggable="{ onStart: 'startDragging', onStop: 'stopDragging' }">
           {{cellgrid.name}}<br>
           {{cellgrid.group.name}}<br>
           <a class="btn btn-edit" title="edit" href="" ng-click="openEditor(cellgrid)">
@@ -40,6 +51,14 @@
           <div class="form-group">
             <label for="input-name-editor">Name</label>
             <input type="text" ng-model="currentEdit.name" class="form-control" id="input-name-editor" placeholder="Enter a name.">
+          </div>
+          <div class="form-group">
+            <label for="input-group-name-editor">Group Name</label>
+            <input type="text" ng-model="currentEdit.group.name" class="form-control" id="input-group-name-editor" placeholder="Enter a name.">
+          </div>
+          <div class="form-group" ng-repeat="parameter in currentEdit.param">
+            <label for="input-editor-parameter-{{$index}}">{{parameter.name}}</label>
+            <input type="text" ng-model="parameter.value" class="form-control" id="input-editor-parameter-{{$index}}" placeholder="Enter a name.">
           </div>
         </form>
       </div>

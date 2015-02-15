@@ -2,9 +2,16 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET     /configs                    controllers.Application.getConfigList()
-GET     /configs/:filename          controllers.Application.getConfig(filename : String)
-POST    /configs/:filename          controllers.Application.saveConfig(filename : String)
+GET     /configs                    controllers.ConfigManager.getConfigList()
+GET     /configs/:filename          controllers.ConfigManager.getConfig(filename : String)
+POST    /configs/:filename          controllers.ConfigManager.saveConfig(filename : String)
+
+GET     /wrapper/ping               controllers.Wrapper.ping()
+
+
+
+
+OPTIONS /*all                       controllers.ConfigManager.preflight(all)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

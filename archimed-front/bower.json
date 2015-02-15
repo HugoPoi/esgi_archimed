@@ -12,7 +12,7 @@
     "angular-animate": "~1.2.0",
     "angular-touch": "~1.2.0",
     "angular-route": "~1.2.0",
-    "angular-dragdrop": "~1.0.8",
+    "angular-dragdrop": "~1.0.11",
     "array2d": "*",
     "underscore": "~1.7.0"
   },

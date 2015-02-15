@@ -16,7 +16,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ngDragDrop'
+    'ngDragDrop',
+    'archimed.services.backend'
   ])
   .config(function ($routeProvider) {
     $routeProvider

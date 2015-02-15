@@ -6,7 +6,14 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 
 body{
   background-color: purple;
-  color: white;
+
+  .wrapper{
+    background-color: blue;
+  }
+
+  .mediator{
+    background-color: orange;
+  }
 
   .row.panel-container{
     &{
@@ -19,11 +26,12 @@ body{
   }
 
   #left-panel{
+    color: white;
     &{
       padding: 0;
       border-right: solid 1px white;
     }
-    h2{
+    .new-item h2{
       margin: 0;
       padding: 0.5em;
       cursor: grab;
@@ -31,6 +39,7 @@ body{
   }
 
   .grid-line-container{
+    color: white;
     &.dragging{
       border-bottom: dashed 1px rgba(255, 255, 255, 0.40);
     }
@@ -46,7 +55,7 @@ body{
       }
       .content{
         padding: 1em;
-        position: absolute;
+        position: absolute !important;
         width: 100%;
         height: 100%;
         font-weight: bold;
