@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 
 /**
- * Created by hugo on 17/01/15.
+ * Created on 17/01/15.
  */
 public class WrapperSqlService {
     private static WrapperSqlService singleton;

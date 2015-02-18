@@ -11,7 +11,7 @@ import javax.xml.bind.JAXBException;
 import static play.libs.Json.*;
 
 /**
- * Created by hugo on 15/01/15.
+ * Created on 15/01/15.
  */
 public class WrapperManager extends Controller {
 

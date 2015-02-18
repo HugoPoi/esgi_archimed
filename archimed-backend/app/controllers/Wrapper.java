@@ -1,6 +1,7 @@
 package controllers;
 
 import models.WrapperSqlService;
+import models.XPathToSQL;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import play.libs.XML;
@@ -22,13 +23,14 @@ import java.sql.*;
 import static play.libs.Json.*;
 
 /**
- * Created by hugo on 15/01/15.
+ * Created on 15/01/15.
  */
 public class Wrapper extends Controller {
 
     public static Result doRequest(String xpath){
 
         try {
+            XPathToSQL.sqlFromXPath(xpath);
             Connection con = WrapperSqlService.getInstance().getConnection();
             Statement s = con.createStatement();
             return ok(getStringFromDoc(toDocument(s.executeQuery(xpath)))).as("application/xml");

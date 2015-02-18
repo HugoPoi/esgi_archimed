@@ -145,4 +145,16 @@ angular.module('archimedApp')
     $scope.executeRequest = function(){
       $scope.request.response = Wrapper.get({ action : 'ping'});
     };
+
+    $scope.addParam = function(){
+      if($scope.currentEdit.param === undefined){
+        $scope.currentEdit.param = [];
+      }
+      $scope.currentEdit.param.push({value:'', name:''});
+    };
+
+    $scope.deleteParam = function(param){
+      //delete param;
+    };
+
   });

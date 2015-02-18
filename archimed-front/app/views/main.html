@@ -17,7 +17,7 @@
       <h3>Configurations list</h3>
       <h2 ng-repeat="config in configList">
         <a ng-click="loadConfig(config)" href="">{{config.filename}}</a>
-        <a class="save-config glyphicon glyphicon-download-alt pull-right" target="_blank" href="http://localhost:9001/config/{{config.filename}}?format=xml"></a>
+        <a class="save-config glyphicon glyphicon-download-alt pull-right" target="_blank" href="http://localhost:9001/configs/{{config.filename}}?format=xml"></a>
         <a class="save-config glyphicon glyphicon-floppy-disk pull-right" ng-click="saveConfig(config.filename)"></a>
       </h2>
       <h3 ng-click="newConfig()" href="">New file</h3>
@@ -65,6 +65,7 @@
             <label for="input-group-name-editor">Group Name</label>
             <input type="text" ng-model="currentEdit.group.name" class="form-control" id="input-group-name-editor" placeholder="Enter a name.">
           </div>
+          <button ng-click="addParam()" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
           <div class="form-inline" ng-repeat="parameter in currentEdit.param">
             <div class="form-group">
               <label for="input-editor-parameter-name-{{$index}}">Name</label>
