@@ -1,4 +1,5 @@
-import java.net.URL;
+
+import models.WrapperSqlService;
 import play.*;
 import play.libs.F.Promise;
 import play.mvc.Action;
@@ -6,7 +7,7 @@ import play.mvc.Http;
 import play.mvc.Result;
 
 /**
- * Created by hugo on 15/02/15.
+ * Created by hugo on 15/01/15.
  */
 public class Global extends GlobalSettings {
 
@@ -30,5 +31,6 @@ public class Global extends GlobalSettings {
                                java.lang.reflect.Method actionMethod) {
         return new ActionWrapper(super.onRequest(request, actionMethod));
     }
+
 
 }

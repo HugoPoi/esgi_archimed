@@ -8,7 +8,7 @@
  * Controller of the archimedApp
  */
 angular.module('archimedApp')
-  .controller('MainCtrl', function ($scope, $timeout, Config) {
+  .controller('MainCtrl', function ($scope, $timeout, Config, Wrapper) {
 
     $scope.configList = Config.query();
 
@@ -33,7 +33,11 @@ angular.module('archimedApp')
       var newConfig = { environnements : { group : [] } };
       $scope.checkGroups(function(group, mediator, wrappers){
 
-        var newGroup = { name: mediator.group.name, mediator : _.omit(mediator,['group', 'type']), wrapper: _.map( wrappers, function(v){ return _.omit(v, ['group', 'type'])}) };
+        var newGroup = { name: mediator.group.name,
+          active: mediator.group.active || false,
+          mediator : _.omit(mediator,['group', 'type']),
+          wrapper: _.map( wrappers, function(v){ return _.omit(v, ['group', 'type'])})
+        };
 
         newConfig.environnements.group.push(newGroup);
       });
@@ -54,6 +58,14 @@ angular.module('archimedApp')
     $scope.deleteCell = function( r, c ){
       $scope.grid[r][c] = null;
       $scope.checkGroups();
+    };
+
+    $scope.active = function(cell){
+      if(cell.group.active === undefined){
+        cell.group.active = true;
+      }else{
+        cell.group.active = !cell.group.active;
+      }
     };
 
     $scope.checkGroups = function( saveCallback ){
@@ -110,7 +122,10 @@ angular.module('archimedApp')
         if(!neighbors[1]){ classes.push('free-left');}
         if(!neighbors[2]){ classes.push('free-right');}
         if(!neighbors[3]){ classes.push('free-bottom');}
-        if(cell.group !== undefined){ classes.push(cell.group.status);}
+        if(cell.group !== undefined){
+          classes.push(cell.group.status);
+          if(cell.group.active){ classes.push('group-activated'); }
+        }
       }
       return classes;
     };
@@ -120,5 +135,14 @@ angular.module('archimedApp')
     };
     $scope.stopDragging = function(){
       $scope.currentlyDragging = false;
+    };
+
+    $scope.openRequest = function(){
+      $('#request-modal').modal();
+    };
+    $scope.request = { xpath: '', response: ''};
+
+    $scope.executeRequest = function(){
+      $scope.request.response = Wrapper.get({ action : 'ping'});
     };
   });

@@ -15,11 +15,17 @@
 
     <div class="menu-list-config">
       <h3>Configurations list</h3>
-      <h2 ng-repeat="config in configList" ng-click="loadConfig(config)">{{config.filename}}</h2>
-      <h3 ng-click="saveConfig('test.xml')">New file</h3>
+      <h2 ng-repeat="config in configList">
+        <a ng-click="loadConfig(config)" href="">{{config.filename}}</a>
+        <a class="save-config glyphicon glyphicon-download-alt pull-right" target="_blank" href="http://localhost:9001/config/{{config.filename}}?format=xml"></a>
+        <a class="save-config glyphicon glyphicon-floppy-disk pull-right" ng-click="saveConfig(config.filename)"></a>
+      </h2>
+      <h3 ng-click="newConfig()" href="">New file</h3>
     </div>
 
-    <div class=""></div>
+    <div class="">
+      <h2><a ng-click="openRequest()" href="">Launch a request</a></h2>
+    </div>
   </div>
   <div class="col-md-9" id="grid-panel">
     <div class="row grid-line-container" ng-repeat="gridline in grid" ng-init="lineindex = $index" ng-class="{ 'dragging' : currentlyDragging }">
@@ -27,6 +33,9 @@
         <div class="content" ng-show="cellgrid" ng-class="genClassItem(cellgrid, lineindex, cellindex)" ng-model="grid[lineindex][cellindex]" data-drag="true" jqyoui-draggable="{ onStart: 'startDragging', onStop: 'stopDragging' }">
           {{cellgrid.name}}<br>
           {{cellgrid.group.name}}<br>
+          <a ng-show="cellgrid.type == 'mediator'" class="btn btn-active" title="active" href="" ng-click="active(cellgrid)">
+            <i class="glyphicon glyphicon-play"></i>
+          </a>
           <a class="btn btn-edit" title="edit" href="" ng-click="openEditor(cellgrid)">
             <i class="glyphicon glyphicon-cog"></i>
           </a>
@@ -56,15 +65,47 @@
             <label for="input-group-name-editor">Group Name</label>
             <input type="text" ng-model="currentEdit.group.name" class="form-control" id="input-group-name-editor" placeholder="Enter a name.">
           </div>
-          <div class="form-group" ng-repeat="parameter in currentEdit.param">
-            <label for="input-editor-parameter-{{$index}}">{{parameter.name}}</label>
-            <input type="text" ng-model="parameter.value" class="form-control" id="input-editor-parameter-{{$index}}" placeholder="Enter a name.">
+          <div class="form-inline" ng-repeat="parameter in currentEdit.param">
+            <div class="form-group">
+              <label for="input-editor-parameter-name-{{$index}}">Name</label>
+              <input type="text" ng-model="parameter.name" class="form-control" id="input-editor-parameter-name-{{$index}}" placeholder="Enter a name.">
+            </div>
+            <div class="form-group">
+              <label for="input-editor-parameter-value-{{$index}}">Value</label>
+              <input type="text" ng-model="parameter.value" class="form-control" id="input-editor-parameter-value-{{$index}}" placeholder="Enter a name.">
+            </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="request-modal" tabindex="-1" role="dialog" aria-labelledby="modal-request-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="modal-request-label">Launch Request</h4>
+      </div>
+      <div class="modal-body">
+        <form role="form">
+          <div class="form-group">
+            <label for="input-request-xpath">XPATH</label>
+            <input type="text" ng-model="request.xpath" class="form-control" id="input-request-xpath" placeholder="Enter a xpath request.">
+          </div>
+          <button class="btn btn-primary" ng-click="executeRequest()">Execute</button>
+          <div class="form-group">
+            <label for="input-request-response">Response</label>
+            <textarea ng-model="request.response" class="form-control" id="input-request-response"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
       </div>
     </div>
   </div>

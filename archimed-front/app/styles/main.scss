@@ -90,16 +90,23 @@ body{
       .invalid-group{
         border-color: red;
       }
+      .group-activated{
+        border-color: green;
+      }
 
-      .btn-edit{
+      .btn{
         position: absolute;
         bottom: 0;
+      }
+
+      .btn-edit{
         right: 0;
       }
       .btn-delete{
-        position: absolute;
-        bottom: 0;
         right: 40px;
+      }
+      .btn-active{
+        right: 80px;
       }
     }
   }

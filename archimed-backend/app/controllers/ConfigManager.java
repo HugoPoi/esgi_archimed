@@ -31,9 +31,13 @@ public class ConfigManager extends Controller {
 
     }
 
-    public static Result getConfig(String filename){
+    public static Result getConfig(String filename, String format){
         try {
-            return ok(toJson((new ArchimedConfig(filename)).getXmlConf()));
+            if(format.equals("xml")){
+                return ok((new ArchimedConfig(filename)).path);
+            }else{
+                return ok(toJson((new ArchimedConfig(filename)).getXmlConf()));
+            }
         }catch (JAXBException e){
             return internalServerError(toJson(e));
         }

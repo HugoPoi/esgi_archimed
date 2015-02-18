@@ -3,11 +3,11 @@
 # ~~~~
 
 GET     /configs                    controllers.ConfigManager.getConfigList()
-GET     /configs/:filename          controllers.ConfigManager.getConfig(filename : String)
+GET     /configs/:filename          controllers.ConfigManager.getConfig(filename : String, format ?= "json")
 POST    /configs/:filename          controllers.ConfigManager.saveConfig(filename : String)
 
 GET     /wrapper/ping               controllers.Wrapper.ping()
-
+GET     /wrapper/request            controllers.Wrapper.doRequest(xpath)
 
 
 
