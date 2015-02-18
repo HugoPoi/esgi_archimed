@@ -6,9 +6,6 @@ import play.mvc.Action;
 import play.mvc.Http;
 import play.mvc.Result;
 
-/**
- * Created by hugo on 15/01/15.
- */
 public class Global extends GlobalSettings {
 
     // For CORS

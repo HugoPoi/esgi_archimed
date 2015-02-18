@@ -4,9 +4,6 @@ import org.w3c.xpath.parser.*;
 
 import java.io.StringReader;
 
-/**
- * Created on 30/01/15.
- */
 public class XPathToSQL {
 
     public static String sqlFromXPath(String xpathStr) throws ParseException{
