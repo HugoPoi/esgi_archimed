@@ -30,10 +30,10 @@ public class Wrapper extends Controller {
     public static Result doRequest(String xpath){
 
         try {
-            XPathToSQL.sqlFromXPath(xpath);
+            XPathToSQL e = new XPathToSQL(xpath);
             Connection con = WrapperSqlService.getInstance().getConnection();
             Statement s = con.createStatement();
-            return ok(getStringFromDoc(toDocument(s.executeQuery(xpath)))).as("application/xml");
+            return ok(getStringFromDoc(toDocument(s.executeQuery(e.sqlRequest)))).as("application/xml");
         }catch (Exception e){
             return badRequest(toJson(e));
         }

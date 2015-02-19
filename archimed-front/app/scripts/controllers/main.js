@@ -143,7 +143,12 @@ angular.module('archimedApp')
     $scope.request = { xpath: '', response: ''};
 
     $scope.executeRequest = function(){
-      $scope.request.response = Wrapper.get({ action : 'ping'});
+      jQuery.get('http://localhost:9001/wrapper/request', { xpath: $scope.request.xpath }, function(data){
+        $scope.request.response = data;
+      }, 'html');
+      /*$scope.request.response = Wrapper.get({ action : 'request', xpath: $scope.request.xpath}, function(data){
+        console.log(data);
+      });*/
     };
 
     $scope.addParam = function(){
