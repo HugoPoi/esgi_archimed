@@ -11,9 +11,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 
-/**
- * Created on 17/01/15.
- */
 public class WrapperSqlService {
     private static WrapperSqlService singleton;
 

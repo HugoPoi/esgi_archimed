@@ -9,9 +9,6 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by hugo on 25/01/15.
- */
 public class FileInfo {
 
     public File path;
