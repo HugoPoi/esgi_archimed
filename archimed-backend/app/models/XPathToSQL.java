@@ -1,8 +1,5 @@
 package models;
 
-import org.w3c.xpath.parser.*;
-
-import java.io.StringReader;
 
 public class XPathToSQL {
 
@@ -12,7 +9,7 @@ public class XPathToSQL {
     public String sqlRequest;
     public String field;
 
-    public XPathToSQL(String xpathStr) throws ParseException{
+    public XPathToSQL(String xpathStr){
 
         StringBuilder sql = new StringBuilder();
         //XPath parser = new XPath(new StringReader(xpathStr));
